@@ -12,6 +12,8 @@ interface Data {
   seo_score: number;
 }
 
+export const revalidate = 10;
+
 export default async function Page() {
   const supabase = createClient();
   const { data } = await supabase.from("web").select();
