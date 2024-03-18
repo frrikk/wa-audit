@@ -5,6 +5,7 @@ import { DataTable } from "@/components/table";
 import { IconArrowRight, IconBulb } from "@tabler/icons-react";
 
 interface Data {
+  id: string;
   url: string;
   accessibility_score: number;
   performance_score: number;
@@ -24,7 +25,7 @@ export default async function Page() {
   if (!webData) return null;
 
   return (
-    <main className="bg-white min-h-screen max-w-[1200px] p-8 mx-auto border-x border-x-slate-200">
+    <>
       <h1 className={cn("font-light text-3xl antialiased ")}>
         Web Performance for Tietoevry Norway related websites
       </h1>
@@ -118,7 +119,7 @@ export default async function Page() {
                   </p>
                 </div>
                 <Link
-                  href={`result/${urlName}`}
+                  href={`result/${site.id}`}
                   className={cn(
                     "uppercase tracking-wide font-medium text-[10px] p-2 relative bg-sky-50 rounded-md gap-1 flex items-center text-sky-900",
                   )}
@@ -139,7 +140,7 @@ export default async function Page() {
           );
         })}
       </ul>
-    </main>
+    </>
   );
 }
 

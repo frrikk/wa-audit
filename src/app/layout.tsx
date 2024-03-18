@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { Inter, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/utils/cn";
 
 const inter = Inter({ subsets: ["latin"] });
 const grotesk = Schibsted_Grotesk({ subsets: ["latin"] });
@@ -17,8 +19,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body className={`${inter.className} bg-slate-50 min-h-screen`}>
-        {children}
+        <MantineProvider>
+          <main
+            className={cn(
+              "bg-white min-h-screen max-w-[1200px] p-8 mx-auto border-x border-x-slate-200",
+            )}
+          >
+            {children}
+          </main>
+        </MantineProvider>
       </body>
     </html>
   );
