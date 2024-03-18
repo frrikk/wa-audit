@@ -1,6 +1,8 @@
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
+import { DataTable } from "@/components/table";
+import { IconBulb } from "@tabler/icons-react";
 
 interface Data {
   url: string;
@@ -83,21 +85,36 @@ export default async function Page() {
               </div>
               <div
                 className={cn(
-                  "flex gap-2 p-2 text-xs [&_span]:text-slate-700 flex-wrap",
+                  "flex justify-between flex-col lg:flex-row gap-3 items-baseline",
                 )}
               >
-                <p className={scoreColor(site.accessibility_score)}>
-                  LH Accessibility <span>{site.accessibility_score}</span>
-                </p>
-                <p className={scoreColor(site.performance_score)}>
-                  LH Performance <span>{site.performance_score}</span>
-                </p>
-                <p className={scoreColor(site.best_practices_score)}>
-                  LH Best Practices <span>{site.best_practices_score}</span>
-                </p>
-                <p className={scoreColor(site.seo_score)}>
-                  LH SEO <span>{site.seo_score}</span>
-                </p>
+                <div
+                  className={cn(
+                    "flex gap-2 p-2 text-xs [&_span]:text-slate-700 flex-wrap",
+                  )}
+                >
+                  <p className={scoreColor(site.accessibility_score)}>
+                    LH Accessibility <span>{site.accessibility_score}</span>
+                  </p>
+                  <p className={scoreColor(site.performance_score)}>
+                    LH Performance <span>{site.performance_score}</span>
+                  </p>
+                  <p className={scoreColor(site.best_practices_score)}>
+                    LH Best Practices <span>{site.best_practices_score}</span>
+                  </p>
+                  <p className={scoreColor(site.seo_score)}>
+                    LH SEO <span>{site.seo_score}</span>
+                  </p>
+                </div>
+                <Link
+                  href="#"
+                  className={cn(
+                    "text-sm py-2 px-3 rounded-lg gap-1 bg-slate-100 flex items-center text-blue-950",
+                  )}
+                >
+                  <IconBulb size="20" />
+                  Suggestions
+                </Link>
               </div>
             </li>
           );
