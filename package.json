@@ -11,6 +11,9 @@
     "lighthouse-gen": "node src/utils/lighthouse-measure.js"
   },
   "dependencies": {
+    "@axe-core/puppeteer": "^4.8.5",
+    "@mantine/core": "^7.6.2",
+    "@mantine/hooks": "^7.6.2",
     "@supabase/ssr": "^0.1.0",
     "@tabler/icons-react": "^3.1.0",
     "chrome-launcher": "^1.1.0",
