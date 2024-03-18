@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lightouse-gen": "node src/utils/lighthouse-measure.js"
+    "lighthouse-gen": "node src/utils/lighthouse-measure.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.1.0",
