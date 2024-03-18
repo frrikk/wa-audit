@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
 import { DataTable } from "@/components/table";
-import { IconBulb } from "@tabler/icons-react";
+import { IconArrowRight, IconBulb } from "@tabler/icons-react";
 
 interface Data {
   url: string;
@@ -10,6 +10,7 @@ interface Data {
   performance_score: number;
   best_practices_score: number;
   seo_score: number;
+  axe_violations: number;
 }
 
 export const revalidate = 10;
@@ -28,16 +29,24 @@ export default async function Page() {
         Web Performance for Tietoevry Norway related websites
       </h1>
       <p className={cn("font-light text-sm mt-2 mb-8")}>
-        Test done with{" "}
+        Tests done by{" "}
         <Link
           className={cn("underline underline-offset-4 text-blue-900")}
           href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring"
         >
           Lighthouse
+        </Link>{" "}
+        and{" "}
+        <Link
+          href="https://www.deque.com/axe/"
+          className={cn("underline underline-offset-4 text-blue-900")}
+        >
+          Axe
         </Link>
       </p>
       <ul className={cn("flex flex-col")}>
         {webData.map((site, index) => {
+          const urlName = site.url.split("://")[1];
           const scoreSum =
             site.accessibility_score +
             site.performance_score +
@@ -87,7 +96,7 @@ export default async function Page() {
               </div>
               <div
                 className={cn(
-                  "flex justify-between flex-col lg:flex-row gap-3 items-baseline",
+                  "flex justify-between flex-col lg:flex-row gap-5 lg:gap-1 items-baseline",
                 )}
               >
                 <div
@@ -109,13 +118,21 @@ export default async function Page() {
                   </p>
                 </div>
                 <Link
-                  href="#"
+                  href={`result/${urlName}`}
                   className={cn(
-                    "text-sm py-2 px-3 rounded-lg gap-1 bg-slate-100 flex items-center text-blue-950",
+                    "uppercase tracking-wide font-medium text-[10px] p-2 relative bg-sky-50 rounded-md gap-1 flex items-center text-sky-900",
                   )}
                 >
-                  <IconBulb size="20" />
-                  Suggestions
+                  Axe improvements <IconArrowRight size={12} />
+                  <div
+                    className={cn(
+                      "bg-sky-600 w-[20px]  h-[20px] text-white flex justify-center items-center rounded-md absolute -top-[14px] -right-[10px]",
+                    )}
+                  >
+                    <span className={cn("relative left-[.5px]")}>
+                      {site.axe_violations}
+                    </span>
+                  </div>
                 </Link>
               </div>
             </li>
