@@ -1,19 +1,11 @@
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
-import { RealtimeUrls } from "@/components/realtime-urls";
-import { Input } from "@/components/input";
+import { createClient } from "@/utils/supabase/client";
+import { getLighthouseData } from "@/utils/get-lighthouse-data";
 
 export default async function Page() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   const { data: web } = await supabase.from("web").select();
 
   if (!web) return null;
 
-  return (
-    <div>
-      <RealtimeUrls urls={web} />
-      <Input />
-    </div>
-  );
+  return <div>{JSON.stringify(web, null, 2)}</div>;
 }
