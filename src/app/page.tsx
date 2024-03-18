@@ -24,6 +24,17 @@ export default async function Page() {
 
   if (!webData) return null;
 
+  const sortedData = webData
+    .map((item) => ({
+      ...item,
+      score:
+        item.accessibility_score +
+        item.performance_score +
+        item.best_practices_score +
+        item.seo_score,
+    }))
+    .sort((a, b) => b.score - a.score);
+
   return (
     <>
       <h1 className={cn("font-light text-3xl antialiased ")}>
@@ -46,8 +57,7 @@ export default async function Page() {
         </Link>
       </p>
       <ul className={cn("flex flex-col")}>
-        {webData.map((site, index) => {
-          const urlName = site.url.split("://")[1];
+        {sortedData.map((site, index) => {
           const scoreSum =
             site.accessibility_score +
             site.performance_score +
