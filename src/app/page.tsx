@@ -1,4 +1,3 @@
-import { Database } from "@/generated/database.types";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
