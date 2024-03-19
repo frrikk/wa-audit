@@ -69,11 +69,11 @@ export default async function Page() {
 
           const scoreColor = (score: number) => {
             if (score < 50) {
-              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-red-200 [span]:text-slate-50";
+              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-red-100 [span]:text-slate-50";
             } else if (score < 90 && score >= 50) {
-              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-yellow-200";
+              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-yellow-100";
             } else {
-              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-green-200";
+              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-green-100";
             }
           };
 
@@ -84,7 +84,7 @@ export default async function Page() {
                 "flex flex-col border-b py-4 animate-fadeInChildren",
               )}
             >
-              <div className={cn("flex gap-4 items-center")}>
+              <div className={cn("flex gap-3 items-center")}>
                 <p className={cn("font-semibold text-slate-800")}>
                   {index + 1}.
                 </p>
@@ -99,11 +99,14 @@ export default async function Page() {
                   </Link>
                 </h2>
                 <div
-                  className={cn("p-2 text-sm font-semibold rounded-md", {
-                    "bg-red-200": scoreAvarge < 50,
-                    "bg-yellow-200": scoreAvarge < 90 && scoreAvarge >= 50,
-                    "bg-green-200": scoreAvarge >= 90,
-                  })}
+                  className={cn(
+                    "p-2 text-xs font-semibold rounded-md w-[34px] h-[34px] flex justify-center",
+                    {
+                      "bg-red-300": scoreAvarge < 50,
+                      "bg-yellow-300": scoreAvarge < 90 && scoreAvarge >= 50,
+                      "bg-green-300": scoreAvarge >= 90,
+                    },
+                  )}
                 >
                   {Math.round(scoreAvarge)}
                 </div>

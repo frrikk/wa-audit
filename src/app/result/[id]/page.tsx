@@ -31,7 +31,7 @@ export default async function ResultPage({
         <h1>
           <Link
             className={cn(
-              "text-slate-600 text-2xl font-light underline underline-offset-4",
+              "text-slate-600 text-lg font-light underline underline-offset-4",
             )}
             href={url}
           >
@@ -40,7 +40,9 @@ export default async function ResultPage({
         </h1>
       </div>
       <h2
-        className={cn("text-xl mb-2 font-medium mt-8 animate-fadeInChildren")}
+        className={cn(
+          "text-2xl text-slate-700 mb-3 font-light mt-8 animate-fadeInChildren",
+        )}
       >
         Improvements
       </h2>
