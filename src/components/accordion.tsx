@@ -49,6 +49,7 @@ export function A11yAccordion({
           <p className={cn("mb-4 text-lg font-light")}>{help}</p>
           <Link
             href={helpUrl}
+            target="_blank"
             className={cn(
               "text-slate-700 group underline-offset-4 underline flex gap-2 transition hover:text-blue-700",
             )}

@@ -1,8 +1,7 @@
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
-import { DataTable } from "@/components/table";
-import { IconArrowRight, IconBulb, IconCheck } from "@tabler/icons-react";
+import { IconArrowRight, IconCheck } from "@tabler/icons-react";
 
 interface Data {
   id: string;
