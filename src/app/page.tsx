@@ -36,8 +36,10 @@ export default async function Page() {
     .sort((a, b) => b.score - a.score);
 
   return (
-    <main>
-      <h1 className={cn("font-light text-3xl antialiased ")}>
+    <main className={cn("animate-fadeIn")}>
+      <h1
+        className={cn("font-light text-3xl antialiased transition ease-in-out")}
+      >
         Web Performance for Tietoevry Norway related websites
       </h1>
       <p className={cn("font-light text-sm mt-2 mb-8")}>
@@ -79,7 +81,9 @@ export default async function Page() {
           return (
             <li
               key={`${index}-${site.url}`}
-              className={cn("flex flex-col border-b py-4")}
+              className={cn(
+                "flex flex-col border-b py-4 animate-fadeInChildren",
+              )}
             >
               <div className={cn("flex gap-4 items-center")}>
                 <p className={cn("font-semibold text-slate-800")}>
@@ -131,7 +135,7 @@ export default async function Page() {
                 <Link
                   href={`result/${site.id}`}
                   className={cn(
-                    "uppercase tracking-wide font-medium text-[10px] p-2 relative bg-sky-50 rounded-md gap-1 flex items-center text-sky-900",
+                    "uppercase tracking-wide font-medium text-[10px] p-2 relative bg-sky-50 rounded-md gap-1 flex items-center text-sky-900 hover:bg-sky-200 transition",
                   )}
                 >
                   Axe improvements <IconArrowRight size={12} />

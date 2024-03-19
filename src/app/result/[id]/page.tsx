@@ -24,7 +24,7 @@ export default async function ResultPage({
 
   return (
     <div>
-      <div className={cn("flex items-center gap-4")}>
+      <div className={cn("flex items-center gap-4 animate-fadeIn")}>
         <Link href="/">
           <IconArrowLeft />
         </Link>
@@ -39,8 +39,16 @@ export default async function ResultPage({
           </Link>
         </h1>
       </div>
-      <h2 className={cn("text-xl mb-2 font-medium mt-8")}>Improvements</h2>
-      <div className={cn("flex gap-2 font-medium pb-8 border-b")}>
+      <h2
+        className={cn("text-xl mb-2 font-medium mt-8 animate-fadeInChildren")}
+      >
+        Improvements
+      </h2>
+      <div
+        className={cn(
+          "flex gap-2 font-medium pb-8 border-b animate-fadeInChildren",
+        )}
+      >
         <div
           className={cn(
             "uppercase bg-sky-200 text-[10px] tracking-wide w-fit py-1 px-2 rounded-full",
@@ -70,7 +78,7 @@ export default async function ResultPage({
           Critical
         </div>
       </div>
-      <div className={cn("flex flex-col")}>
+      <div className={cn("flex flex-col animate-fadeInChildren")}>
         {axeResult.map((result, index) => {
           const title = result.id
             .replace("-", " ")

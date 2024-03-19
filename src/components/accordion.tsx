@@ -50,7 +50,7 @@ export function A11yAccordion({
           <Link
             href={helpUrl}
             className={cn(
-              "text-slate-700 underline-offset-4 underline flex gap-2",
+              "text-slate-700 group underline-offset-4 underline flex gap-2 transition hover:text-blue-700",
             )}
           >
             How to fix this?
