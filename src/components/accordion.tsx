@@ -29,7 +29,7 @@ export function A11yAccordion({
       <Accordion.Item key={id} value={title}>
         <Accordion.Control className={cn("uppercase text-xs tracking-wide")}>
           <div className={cn("flex gap-2 items-center")}>
-            <p className={cn("text-gray-700")}>{title}</p>
+            <p className={cn("text-slate-800")}>{title}</p>
             <span
               className={cn(
                 "bg-sky-200 rounded-md min-w-[22px] min-h-[22px] font-medium flex self-center justify-center items-center",
@@ -46,7 +46,9 @@ export function A11yAccordion({
           </div>
         </Accordion.Control>
         <Accordion.Panel className={cn("text-sm flex flex-col pb-2")}>
-          <p className={cn("mb-6 text-slate-900 text-xl font-light")}>{help}</p>
+          <p className={cn("mb-6 text-slate-95000 text-xl font-light")}>
+            {help}
+          </p>
           <Link
             href={helpUrl}
             target="_blank"
