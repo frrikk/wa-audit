@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { Inter, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
@@ -24,13 +25,13 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-slate-50 min-h-screen`}>
         <MantineProvider>
-          <main
+          <div
             className={cn(
               "bg-white min-h-screen max-w-[1200px] p-8 mx-auto border-x border-x-slate-200",
             )}
           >
             {children}
-          </main>
+          </div>
         </MantineProvider>
       </body>
     </html>

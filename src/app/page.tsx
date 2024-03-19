@@ -36,7 +36,7 @@ export default async function Page() {
     .sort((a, b) => b.score - a.score);
 
   return (
-    <>
+    <main>
       <h1 className={cn("font-light text-3xl antialiased ")}>
         Web Performance for Tietoevry Norway related websites
       </h1>
@@ -150,7 +150,7 @@ export default async function Page() {
           );
         })}
       </ul>
-    </>
+    </main>
   );
 }
 
