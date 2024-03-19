@@ -14,7 +14,7 @@ interface Data {
   axe_violations: number;
 }
 
-export const revalidate = 10;
+export const revalidate = 60;
 
 export default async function Page() {
   const supabase = createClient();
@@ -79,7 +79,7 @@ export default async function Page() {
           return (
             <li
               key={`${index}-${site.url}`}
-              className={cn("flex flex-col border-b p-4")}
+              className={cn("flex flex-col border-b py-4")}
             >
               <div className={cn("flex gap-4 items-center")}>
                 <p className={cn("font-semibold text-slate-800")}>

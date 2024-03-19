@@ -9,7 +9,6 @@ import { createClient } from "@supabase/supabase-js";
 import AxePuppeteer, { loadPage } from "@axe-core/puppeteer";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const supabaseUrl = "https://uphvkzpmspfojxfvkxcu.supabase.co";
 const supabaseKey =
@@ -43,6 +42,7 @@ async function runLighthouseAndSaveScores(url) {
     logLevel: "info",
     output: "json",
     port: port,
+    throttling: { cpuSlowdownMultiplier: 3 },
   });
 
   const axeResult = await loadPage(browser, url);
