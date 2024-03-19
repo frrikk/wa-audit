@@ -57,7 +57,7 @@ export function A11yAccordion({
             )}
           >
             <p>
-              What's <span className={cn("text-blue-700")}>{title}</span>, and
+              What is <span className={cn("text-blue-700")}>{title}</span>, and
               how do I fix it?
             </p>
             <IconArrowUpRight size={18} />
