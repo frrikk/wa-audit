@@ -138,7 +138,7 @@ export default async function Page() {
                       "uppercase tracking-wide font-medium text-[10px] p-2 relative bg-sky-50 rounded-md gap-1 flex items-center text-sky-900 hover:bg-sky-200 transition",
                     )}
                   >
-                    Axe improvements <IconArrowRight size={12} />
+                    A11Y improvements <IconArrowRight size={12} />
                     <div
                       className={cn(
                         "bg-sky-600 w-[20px]  h-[20px] text-white flex justify-center items-center rounded-md absolute -top-[14px] -right-[10px]",
@@ -155,7 +155,7 @@ export default async function Page() {
                       "uppercase tracking-wide font-medium text-[10px] p-2 bg-green-100 rounded-md gap-1 flex items-center text-green-900 transition cursor-default relative",
                     )}
                   >
-                    All good{" "}
+                    a11y on point{" "}
                     <IconCheck
                       size={12}
                       className={cn(
