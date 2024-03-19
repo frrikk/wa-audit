@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
 import { DataTable } from "@/components/table";
-import { IconArrowRight, IconBulb } from "@tabler/icons-react";
+import { IconArrowRight, IconBulb, IconCheck } from "@tabler/icons-react";
 
 interface Data {
   id: string;
@@ -132,23 +132,40 @@ export default async function Page() {
                     LH SEO <span>{site.seo_score}</span>
                   </p>
                 </div>
-                <Link
-                  href={`result/${site.id}`}
-                  className={cn(
-                    "uppercase tracking-wide font-medium text-[10px] p-2 relative bg-sky-50 rounded-md gap-1 flex items-center text-sky-900 hover:bg-sky-200 transition",
-                  )}
-                >
-                  Axe improvements <IconArrowRight size={12} />
-                  <div
+                {site.axe_violations > 0 ? (
+                  <Link
+                    href={`result/${site.id}`}
                     className={cn(
-                      "bg-sky-600 w-[20px]  h-[20px] text-white flex justify-center items-center rounded-md absolute -top-[14px] -right-[10px]",
+                      "uppercase tracking-wide font-medium text-[10px] p-2 relative bg-sky-50 rounded-md gap-1 flex items-center text-sky-900 hover:bg-sky-200 transition",
                     )}
                   >
-                    <span className={cn("relative left-[.5px]")}>
-                      {site.axe_violations}
-                    </span>
+                    Axe improvements <IconArrowRight size={12} />
+                    <div
+                      className={cn(
+                        "bg-sky-600 w-[20px]  h-[20px] text-white flex justify-center items-center rounded-md absolute -top-[14px] -right-[10px]",
+                      )}
+                    >
+                      <span className={cn("relative left-[.5px]")}>
+                        {site.axe_violations}
+                      </span>
+                    </div>
+                  </Link>
+                ) : (
+                  <div
+                    className={cn(
+                      "uppercase tracking-wide font-medium text-[10px] p-2 bg-green-100 rounded-md gap-1 flex items-center text-green-900 transition cursor-default relative",
+                    )}
+                  >
+                    All good{" "}
+                    <IconCheck
+                      size={12}
+                      className={cn(
+                        "bg-green-800 w-[20px] h-[20px] rounded-md p-1 absolute -top-[14px] -right-[10px]",
+                      )}
+                      color="white"
+                    />
                   </div>
-                </Link>
+                )}
               </div>
             </li>
           );
