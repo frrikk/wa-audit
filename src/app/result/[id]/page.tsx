@@ -81,8 +81,8 @@ export default async function ResultPage({
       <div className={cn("flex flex-col animate-fadeInChildren")}>
         {axeResult.map((result, index) => {
           const title = result.id
-            .replace("-", " ")
-            .replace(/^./, result.id[0].toUpperCase());
+            .replace(/-/g, " ")
+            .replace(/^./, (match) => match.toUpperCase());
           return (
             <A11yAccordion
               title={title}
