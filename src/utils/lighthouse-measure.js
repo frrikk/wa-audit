@@ -42,7 +42,7 @@ async function runLighthouseAndSaveScores(url) {
     logLevel: "info",
     output: "json",
     port: port,
-    throttling: { cpuSlowdownMultiplier: 3 },
+    throttling: { cpuSlowdownMultiplier: 2 },
   });
 
   const axeResult = await loadPage(browser, url);
