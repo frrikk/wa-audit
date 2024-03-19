@@ -29,7 +29,7 @@ export function A11yAccordion({
       <Accordion.Item key={id} value={title}>
         <Accordion.Control className={cn("uppercase text-xs tracking-wide")}>
           <div className={cn("flex gap-2 items-center")}>
-            <p className={cn("text-slate-800")}>{title}</p>
+            <p className={cn("text-slate-700")}>{title}</p>
             <span
               className={cn(
                 "bg-sky-200 rounded-md min-w-[22px] min-h-[22px] font-medium flex self-center justify-center items-center",
@@ -45,10 +45,8 @@ export function A11yAccordion({
             </span>
           </div>
         </Accordion.Control>
-        <Accordion.Panel className={cn("text-sm flex flex-col pb-2")}>
-          <p className={cn("mb-6 text-slate-95000 text-xl font-light")}>
-            {help}
-          </p>
+        <Accordion.Panel className={cn("text-sm flex flex-col pb-3")}>
+          <p className={cn("mb-5 text-slate-950 text-lg font-light")}>{help}</p>
           <Link
             href={helpUrl}
             target="_blank"
@@ -56,10 +54,7 @@ export function A11yAccordion({
               "text-slate-700 group underline-offset-4 underline flex gap-2 transition hover:text-blue-700",
             )}
           >
-            <p>
-              What is <span className={cn("text-blue-700")}>{title}</span>, and
-              how do I fix it?
-            </p>
+            How to fix it?
             <IconArrowUpRight size={18} />
           </Link>
         </Accordion.Panel>
