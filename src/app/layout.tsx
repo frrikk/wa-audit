@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { Inter, Schibsted_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/utils/cn";
 
 const inter = Inter({ subsets: ["latin"] });
-const grotesk = Schibsted_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tietoevry WebPerf",
@@ -23,11 +22,14 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={`${inter.className} bg-slate-50 min-h-screen`}>
+      <body
+        suppressHydrationWarning
+        className={`${inter.className} bg-slate-50 min-h-dvh`}
+      >
         <MantineProvider>
           <div
             className={cn(
-              "bg-white min-h-screen max-w-[1200px] p-8 mx-auto border-x border-x-slate-200",
+              "min-h-screen max-w-[1600px] bg-slate-50 p-6 md:p-12 mx-auto border-x border-slate-200",
             )}
           >
             {children}
