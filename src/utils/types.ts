@@ -24,3 +24,21 @@ interface AxeCheck {
   relatedNodes?: any[];
   // Include other properties as needed
 }
+
+export interface SupabaseData {
+  id: string;
+  url: string;
+  accessibility_score: number;
+  performance_score: number;
+  best_practices_score: number;
+  seo_score: number;
+  axe_violations: number;
+  name: string;
+  segment: string;
+  avarageScore: number;
+  axe_result: AxeResult[];
+}
+
+export interface SupabaseCardData {
+  data: SupabaseData[];
+}

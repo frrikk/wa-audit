@@ -1,17 +1,7 @@
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
-import { IconArrowRight, IconCheck } from "@tabler/icons-react";
-
-interface Data {
-  id: string;
-  url: string;
-  accessibility_score: number;
-  performance_score: number;
-  best_practices_score: number;
-  seo_score: number;
-  axe_violations: number;
-}
+import { SupabaseData } from "@/utils/types";
 
 export const revalidate = 60;
 
@@ -19,7 +9,7 @@ export default async function Page() {
   const supabase = createClient();
   const { data } = await supabase.from("web").select();
 
-  const webData: Data[] = data as Data[];
+  const webData: SupabaseData[] = data as SupabaseData[];
 
   if (!webData) return null;
 
@@ -57,7 +47,9 @@ export default async function Page() {
           Axe
         </Link>
       </p>
-      <ul className={cn("flex flex-col")}>
+      <ul
+        className={cn("grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8")}
+      >
         {sortedData.map((site, index) => {
           const scoreSum =
             site.accessibility_score +
@@ -65,111 +57,14 @@ export default async function Page() {
             site.best_practices_score +
             site.seo_score;
 
-          const scoreAvarge = avargeScore(scoreSum) / 4;
-
-          const scoreColor = (score: number) => {
-            if (score < 50) {
-              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-red-100 [span]:text-slate-50";
-            } else if (score < 90 && score >= 50) {
-              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-yellow-100";
-            } else {
-              return "py-1 px-2 flex gap-1 items-center rounded-sm bg-green-100";
-            }
-          };
+          const scoreAvarage = avargeScore(scoreSum) / 4;
 
           return (
-            <li
-              key={`${index}-${site.url}`}
-              className={cn(
-                "flex flex-col border-b py-4 animate-fadeInChildren",
-              )}
-            >
-              <div className={cn("flex gap-3 items-center")}>
-                <p className={cn("font-semibold text-slate-800")}>
-                  {index + 1}.
-                </p>
-                <h2>
-                  <Link
-                    className={cn(
-                      "text-slate-800 underline underline-offset-4",
-                    )}
-                    href={site.url}
-                  >
-                    {site.url}
-                  </Link>
-                </h2>
-                <div
-                  className={cn(
-                    "p-2 text-xs font-semibold rounded-md w-[34px] h-[34px] flex justify-center",
-                    {
-                      "bg-red-300": scoreAvarge < 50,
-                      "bg-yellow-300": scoreAvarge < 90 && scoreAvarge >= 50,
-                      "bg-green-300": scoreAvarge >= 90,
-                    },
-                  )}
-                >
-                  {Math.round(scoreAvarge)}
-                </div>
-              </div>
-              <div
-                className={cn(
-                  "flex justify-between flex-col lg:flex-row gap-5 lg:gap-1 items-baseline",
-                )}
-              >
-                <div
-                  className={cn(
-                    "flex gap-2 p-2 text-xs [&_span]:text-slate-700 flex-wrap",
-                  )}
-                >
-                  <p className={scoreColor(site.accessibility_score)}>
-                    LH Accessibility <span>{site.accessibility_score}</span>
-                  </p>
-                  <p className={scoreColor(site.performance_score)}>
-                    LH Performance <span>{site.performance_score}</span>
-                  </p>
-                  <p className={scoreColor(site.best_practices_score)}>
-                    LH Best Practices <span>{site.best_practices_score}</span>
-                  </p>
-                  <p className={scoreColor(site.seo_score)}>
-                    LH SEO <span>{site.seo_score}</span>
-                  </p>
-                </div>
-                {site.axe_violations > 0 ? (
-                  <Link
-                    href={`result/${site.id}`}
-                    className={cn(
-                      "uppercase tracking-wide font-medium text-[10px] p-2 relative bg-sky-50 rounded-md gap-1 flex items-center text-sky-900 hover:bg-sky-200 transition",
-                    )}
-                  >
-                    A11Y improvements <IconArrowRight size={12} />
-                    <div
-                      className={cn(
-                        "bg-sky-600 w-[20px]  h-[20px] text-white flex justify-center items-center rounded-md absolute -top-[14px] -right-[10px]",
-                      )}
-                    >
-                      <span className={cn("relative left-[.5px]")}>
-                        {site.axe_violations}
-                      </span>
-                    </div>
-                  </Link>
-                ) : (
-                  <div
-                    className={cn(
-                      "uppercase tracking-wide font-medium text-[10px] p-2 bg-green-100 rounded-md gap-1 flex items-center text-green-900 transition cursor-default relative",
-                    )}
-                  >
-                    a11y on point{" "}
-                    <IconCheck
-                      size={12}
-                      className={cn(
-                        "bg-green-800 w-[20px] h-[20px] rounded-md p-1 absolute -top-[14px] -right-[10px]",
-                      )}
-                      color="white"
-                    />
-                  </div>
-                )}
-              </div>
-            </li>
+            <PageCard
+              {...site}
+              key={site.id}
+              avarageScore={Math.round(scoreAvarage)}
+            />
           );
         })}
       </ul>
@@ -179,4 +74,117 @@ export default async function Page() {
 
 const avargeScore = (score: number) => {
   return score;
+};
+
+const PageCard = ({ ...props }: SupabaseData) => {
+  const scores = [
+    {
+      name: "Accessibility",
+      score: props.accessibility_score,
+    },
+    {
+      name: "Performance",
+      score: props.performance_score,
+    },
+    {
+      name: "Best Practices",
+      score: props.best_practices_score,
+    },
+    {
+      name: "SEO",
+      score: props.seo_score,
+    },
+  ];
+
+  return (
+    <Link
+      href={`
+      /result/${props.id}`}
+      className={cn(
+        "bg-white border border-slate-200 rounded-2xl animate-fadeInChildren font-light p-6 transition hover:shadow-lg hover:shadow-slate-200 hover:scale-[1.025]",
+      )}
+    >
+      <div className={cn("flex justify-between items-center")}>
+        <div className={cn("flex flex-col gap-1")}>
+          <h2 className={cn("text-xl")}>{props.name}</h2>
+          <p className={cn("text-slate-600 underline underline-offset-4")}>
+            {props.url}
+          </p>
+        </div>
+        <div
+          className={cn(
+            "rounded-lg size-[40px] flex justify-center items-center font-normal",
+            {
+              "bg-green-300": props.avarageScore >= 90,
+              "bg-yellow-300":
+                props.avarageScore < 90 && props.avarageScore >= 50,
+              "bg-red-300": props.avarageScore < 50,
+            },
+          )}
+        >
+          {props.avarageScore}
+        </div>
+      </div>
+
+      <hr className={cn("my-6")} />
+
+      <div className={cn("flex flex-col gap-4")}>
+        <div className={cn("flex flex-col gap-2")}>
+          <h3 className={cn("tracking-wide uppercase text-xs font-normal")}>
+            Lighthouse
+          </h3>
+          <div className={cn("flex flex-wrap gap-2")}>
+            {scores.map((score, index) => (
+              <p
+                key={index}
+                className={cn(
+                  "px-3 py-2 font-normal gap-1 flex rounded-md uppercase text-xs w-fit tracking-wide",
+                  {
+                    "bg-red-100 text-red-950": score.score < 50,
+                    "bg-yellow-100 text-yellow-950":
+                      score.score < 90 && score.score >= 50,
+                    "bg-green-100 text-green-950": score.score >= 90,
+                  },
+                )}
+              >
+                {score.name}
+                <span className={cn("text-inherit")}>|</span>
+                <span className={cn("font-medium")}>{score.score}</span>
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className={cn("mt-2 flex flex-col gap-2")}>
+          <h3 className={cn("tracking-wide uppercase text-xs font-normal")}>
+            Axe
+          </h3>
+          <div>
+            <div
+              className={cn(
+                "px-3 py-2 bg-sky-100 text-blue-900 font-normal gap-1 flex rounded-md uppercase text-xs w-fit tracking-wide relative",
+              )}
+            >
+              Accessibility violations
+              <div
+                className={cn(
+                  "absolute -top-3 -right-3 font-semibold flex justify-center items-center p-1 bg-red-500 size-[24px] rounded-full text-white",
+                )}
+              >
+                {props.axe_violations}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr className={cn("my-6")} />
+
+      <div>
+        <h3 className={cn("tracking-wide uppercase text-xs font-normal")}>
+          Segment
+        </h3>
+        <p className={cn("text-lg my-1")}>{props.segment}</p>
+      </div>
+    </Link>
+  );
 };

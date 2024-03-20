@@ -1,6 +1,7 @@
 // Assuming you have renamed your script to .mjs or set "type": "module" in your package.json
 
 import lighthouse from "lighthouse";
+import { pages } from "../data/pages.js";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -15,17 +16,17 @@ const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwaHZrenBtc3Bmb2p4ZnZreGN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAzMzAyMDIsImV4cCI6MjAyNTkwNjIwMn0.StG0oFUUOKYxRp6LZWZ5fXJWXe7dDlJtLZ4CHPxwsvU"; // Use your actual Supabase key here
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function runLighthouseAndSaveScores(url) {
+async function runLighthouseAndSaveScores(page) {
   // Check if a report for this URL already exists in Supabase
   const { data: existingData, error: existingError } = await supabase
     .from("web")
     .select("*")
-    .eq("url", url);
+    .eq("url", page.url);
 
   if (existingError) console.error("Error querying Supabase:", existingError);
 
   if (existingData && existingData.length > 0) {
-    console.log(`Report already exists for ${url}. Skipping audit.`);
+    console.log(`Report already exists for ${page.url}. Skipping audit.`);
     return; // Skip the Lighthouse audit if a report already exists
   }
 
@@ -38,14 +39,14 @@ async function runLighthouseAndSaveScores(url) {
   const browserWSEndpoint = browser.wsEndpoint();
   const port = new URL(browserWSEndpoint).port;
 
-  const runnerResult = await lighthouse(url, {
+  const runnerResult = await lighthouse(page.url, {
     logLevel: "info",
     output: "json",
     port: port,
     throttling: { cpuSlowdownMultiplier: 2 },
   });
 
-  const axeResult = await loadPage(browser, url);
+  const axeResult = await loadPage(browser, page.url);
 
   const results = await axeResult.analyze();
 
@@ -66,7 +67,9 @@ async function runLighthouseAndSaveScores(url) {
   // Insert new data into Supabase
   const { data, error } = await supabase.from("web").insert([
     {
-      url: url,
+      url: page.url,
+      segment: page.segment,
+      name: page.name,
       performance_score: scores.performance,
       accessibility_score: scores.accessibility,
       best_practices_score: scores.bestPractices,
@@ -82,13 +85,17 @@ async function runLighthouseAndSaveScores(url) {
   await browser.close();
 }
 
-async function loadUrlsAndRun() {
-  const sitesJsonPath = path.join(path.resolve(), "src", "sites.json");
-  const urls = JSON.parse(await fs.readFile(sitesJsonPath, "utf8"));
+async function loadUrlsAndRun(pages) {
+  // const sitesJsonPath = path.join(path.resolve(), "src", "sites.json");
+  // const urls = JSON.parse(await fs.readFile(sitesJsonPath, "utf8"));
 
-  for (const url of urls) {
-    await runLighthouseAndSaveScores(url).catch(console.error);
+  for (const page of pages) {
+    await runLighthouseAndSaveScores(page).catch(console.error);
   }
+
+  // for (const url of urls) {
+  //   await runLighthouseAndSaveScores(url).catch(console.error);
+  // }
 }
 
-await loadUrlsAndRun();
+await loadUrlsAndRun(pages);
