@@ -36,6 +36,7 @@ export interface SupabaseData {
   name: string;
   segment: string;
   avarageScore: number;
+  axe_result: AxeResult[];
 }
 
 export interface SupabaseCardData {
