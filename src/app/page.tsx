@@ -48,7 +48,9 @@ export default async function Page() {
         </Link>
       </p>
       <ul
-        className={cn("grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8")}
+        className={cn(
+          "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-10",
+        )}
       >
         {sortedData.map((site, index) => {
           const scoreSum =
@@ -98,22 +100,24 @@ const PageCard = ({ ...props }: SupabaseData) => {
 
   return (
     <Link
-      href={`
-      /result/${props.id}`}
+      href={`/result/${props.id}`}
       className={cn(
-        "bg-white border border-slate-200 rounded-2xl animate-fadeInChildren font-light p-6 transition hover:shadow-lg hover:shadow-slate-200 hover:scale-[1.025]",
+        "bg-white rounded-lg animate-fadeInChildren font-light p-6 transition group hover:shadow-xl hover:shadow-gray-200 hover:scale-[1.02]",
       )}
     >
       <div className={cn("flex justify-between items-center")}>
-        <div className={cn("flex flex-col gap-1")}>
-          <h2 className={cn("text-xl")}>{props.name}</h2>
-          <p className={cn("text-slate-600 underline underline-offset-4")}>
+        <div className={cn("flex flex-col")}>
+          <h2 className={cn("text-xl text-black font-normal")}>{props.name}</h2>
+          <Link
+            href={props.url}
+            className={cn("text-stone-500 font-normal text-lg")}
+          >
             {props.url}
-          </p>
+          </Link>
         </div>
         <div
           className={cn(
-            "rounded-lg size-[40px] flex justify-center items-center font-normal",
+            "rounded-lg size-[42px] flex justify-center items-center font-normal text-lg",
             {
               "bg-green-300": props.avarageScore >= 90,
               "bg-yellow-300":
@@ -126,30 +130,30 @@ const PageCard = ({ ...props }: SupabaseData) => {
         </div>
       </div>
 
-      <hr className={cn("my-6")} />
+      <hr className={cn("my-4")} />
 
-      <div className={cn("flex flex-col gap-4")}>
+      <div className={cn("flex flex-col gap-4 relative")}>
         <div className={cn("flex flex-col gap-2")}>
           <h3 className={cn("tracking-wide uppercase text-xs font-normal")}>
             Lighthouse
           </h3>
-          <div className={cn("flex flex-wrap gap-2")}>
+          <div className={cn("flex flex-wrap gap-3")}>
             {scores.map((score, index) => (
               <p
                 key={index}
                 className={cn(
-                  "px-3 py-2 font-normal gap-1 flex rounded-md uppercase text-xs w-fit tracking-wide",
+                  "px-2 py-2 font-normal gap-1 flex rounded-md uppercase text-xs w-fit tracking-wide",
                   {
-                    "bg-red-100 text-red-950": score.score < 50,
+                    "bg-red-200 text-red-950": score.score < 50,
                     "bg-yellow-100 text-yellow-950":
                       score.score < 90 && score.score >= 50,
-                    "bg-green-100 text-green-950": score.score >= 90,
+                    "bg-green-200 text-green-950": score.score >= 90,
                   },
                 )}
               >
                 {score.name}
                 <span className={cn("text-inherit")}>|</span>
-                <span className={cn("font-medium")}>{score.score}</span>
+                <span className={cn("font-semibold")}>{score.score}</span>
               </p>
             ))}
           </div>
@@ -161,13 +165,13 @@ const PageCard = ({ ...props }: SupabaseData) => {
           <div>
             <div
               className={cn(
-                "px-3 py-2 bg-sky-100 text-blue-900 font-normal gap-1 flex rounded-md uppercase text-xs w-fit tracking-wide relative",
+                "px-3 py-2 bg-sky-200 text-sky-950 font-normal gap-1 flex rounded-md uppercase text-xs w-fit tracking-wide relative",
               )}
             >
-              Accessibility violations
+              Accessibility improvements
               <div
                 className={cn(
-                  "absolute -top-3 -right-3 font-semibold flex justify-center items-center p-1 bg-red-500 size-[24px] rounded-full text-white",
+                  "absolute -top-3 -right-3 font-semibold flex justify-center items-center p-1 bg-sky-700 size-[24px] rounded-full text-white",
                 )}
               >
                 {props.axe_violations}
@@ -183,7 +187,7 @@ const PageCard = ({ ...props }: SupabaseData) => {
         <h3 className={cn("tracking-wide uppercase text-xs font-normal")}>
           Segment
         </h3>
-        <p className={cn("text-lg my-1")}>{props.segment}</p>
+        <p className={cn("text-lg text-black font-normal")}>{props.segment}</p>
       </div>
     </Link>
   );
