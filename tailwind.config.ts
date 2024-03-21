@@ -13,8 +13,13 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateX(-.5%)" },
           "100%": { opacity: "1", translate: "translateX(0)" },
         },
+        grayscale: {
+          "0%": { filter: "grayscale(0)" },
+          "100%": { filter: "grayscale(100%)" },
+        },
       },
       animation: {
+        grayscale: "grayscale 5s ease-in-out",
         fadeIn: "fadeIn 0.2s ease-in-out",
         fadeInChildren: "fadeIn .5s ease-in-out",
       },

@@ -107,13 +107,10 @@ const PageCard = ({ ...props }: SupabaseData) => {
     >
       <div className={cn("flex justify-between items-center")}>
         <div className={cn("flex flex-col")}>
-          <h2 className={cn("text-xl text-black font-normal")}>{props.name}</h2>
-          <Link
-            href={props.url}
-            className={cn("text-stone-500 font-normal text-lg")}
-          >
+          <h2 className={cn("text-lg text-black font-normal")}>{props.name}</h2>
+          <div className={cn("text-stone-500 font-normal text-lg")}>
             {props.url}
-          </Link>
+          </div>
         </div>
         <div
           className={cn(
