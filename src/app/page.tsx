@@ -102,7 +102,7 @@ const PageCard = ({ ...props }: SupabaseData) => {
     <Link
       href={`/result/${props.id}`}
       className={cn(
-        "bg-white rounded-lg animate-fadeInChildren font-light p-6 transition hover:shadow-xl hover:shadow-gray-200",
+        "bg-white rounded-lg animate-fadeInChildren font-light p-6 transition group hover:shadow-xl hover:shadow-gray-200 hover:scale-[1.02]",
       )}
     >
       <div className={cn("flex justify-between items-center")}>
