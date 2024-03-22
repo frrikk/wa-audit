@@ -12,7 +12,7 @@ export const pages = [
   },
   {
     url: "https://aneogroup.com/no/",
-    name: "Aneo",
+    name: "Aneo Group",
     segment: "Public & Utility",
   },
   {
@@ -78,11 +78,6 @@ export const pages = [
   {
     url: "https://bolaks.no/",
     name: "Bolaks",
-    segment: "Public & Utility",
-  },
-  {
-    url: "https://nav.no/",
-    name: "Nav",
     segment: "Public & Utility",
   },
 ];
