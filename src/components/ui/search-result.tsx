@@ -1,6 +1,7 @@
 import { PageCard } from "@/components/page-card";
 import { SupabaseData } from "@/utils/types";
 import { createClient } from "@/utils/supabase/client";
+import { cn } from "@/utils/cn";
 
 interface SearchResultProps {
   query: string | undefined;
@@ -39,12 +40,9 @@ export async function SearchResult({ query }: SearchResultProps) {
         const scoreAvarage = Math.round(item.score / 4);
 
         return (
-          <PageCard
-            {...item}
-            key={item.id}
-            query={query}
-            avarageScore={scoreAvarage}
-          />
+          <li key={item.id} className={cn("flex flex-col")}>
+            <PageCard {...item} query={query} avarageScore={scoreAvarage} />
+          </li>
         );
       })}
     </>

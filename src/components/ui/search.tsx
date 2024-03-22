@@ -19,29 +19,41 @@ export const Search = () => {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 50);
+  }, 0);
 
   return (
-    <div className={cn("relative flex flex-col my-4 gap-1")}>
-      <label htmlFor="search" className={cn("text-sm font-light")}>
-        Search companies or segment
-      </label>
+    <div
+      className={cn(
+        "sticky bg-gray-100 top-0 flex flex-col my-4 gap-1 z-10 pt-4",
+      )}
+    >
+      <div className={cn("relative")}>
+        <div
+          className={cn(
+            "absolute w-full h-[42px] -bottom-[42px] bg-gradient-to-b from-gray-100 via-gray-100 via-10%",
+          )}
+        />
+        <label htmlFor="search" className={cn("text-sm font-light")}>
+          Search companies or segment
+        </label>
 
-      <IconSearch
-        size={18}
-        color="gray"
-        className={cn(
-          "absolute flex justify-center items-center bottom-[11px] left-2",
-        )}
-      />
+        <IconSearch
+          size={18}
+          color="gray"
+          className={cn(
+            "absolute flex justify-center items-center bottom-[11px] left-2",
+          )}
+        />
 
-      <input
-        placeholder="Equinor"
-        type="text"
-        defaultValue={searchParams.get("query")?.toString()}
-        onChange={(e) => handleSearch(e.target.value)}
-        className={cn("w-full p-2 rounded-md placeholder:text-sm pl-8")}
-      />
+        <input
+          autoFocus
+          placeholder="Equinor"
+          type="text"
+          defaultValue={searchParams.get("query")?.toString()}
+          onChange={(e) => handleSearch(e.target.value)}
+          className={cn("w-full p-2 rounded-md placeholder:text-sm pl-8")}
+        />
+      </div>
     </div>
   );
 };

@@ -20,7 +20,7 @@ export const MainColumn = ({
         {pageHeading}
       </h1>
       {subHeading ? (
-        <p className={cn("font-light text-sm mt-2 mb-8")}>
+        <p className={cn("font-light text-sm mt-2")}>
           Tests done by{" "}
           <Link
             className={cn("underline underline-offset-4 text-blue-900")}

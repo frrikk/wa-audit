@@ -21,7 +21,7 @@ const config: Config = {
       animation: {
         grayscale: "grayscale 5s ease-in-out",
         fadeIn: "fadeIn 0.2s ease-in-out",
-        fadeInChildren: "fadeIn .5s ease-in-out",
+        fadeInChildren: "fadeIn .5s ease-out",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

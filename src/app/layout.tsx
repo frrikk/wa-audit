@@ -25,12 +25,12 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.className} bg-gray-100/90 h-dvh`}
+        className={`${inter.className} bg-gray-100 h-dvh`}
       >
         <MantineProvider>
           <div
             className={cn(
-              "min-h-screen max-w-[1600px] bg-gray-100/90 p-6 lg:p-12 mx-auto border-x border-slate-200",
+              "min-h-screen max-w-[1600px] bg-gray-100 p-6 lg:p-12 mx-auto border-x border-slate-200",
             )}
           >
             {children}
