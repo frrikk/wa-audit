@@ -19,7 +19,7 @@ export const Search = () => {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 150);
+  }, 50);
 
   return (
     <div className={cn("relative flex flex-col my-4")}>
