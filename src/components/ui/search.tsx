@@ -22,21 +22,21 @@ export const Search = () => {
   }, 50);
 
   return (
-    <div className={cn("relative flex flex-col my-4")}>
+    <div className={cn("relative flex flex-col my-4 gap-1")}>
       <label htmlFor="search" className={cn("text-sm font-light")}>
-        Search companies
+        Search companies or segment
       </label>
 
       <IconSearch
         size={18}
         color="gray"
         className={cn(
-          "absolute flex justify-center items-center bottom-[10px] left-2",
+          "absolute flex justify-center items-center bottom-[11px] left-2",
         )}
       />
 
       <input
-        placeholder="Name or segment"
+        placeholder="Equinor"
         type="text"
         defaultValue={searchParams.get("query")?.toString()}
         onChange={(e) => handleSearch(e.target.value)}

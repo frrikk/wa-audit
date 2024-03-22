@@ -1,5 +1,3 @@
-import { cn } from "@/utils/cn";
-import Link from "next/link";
 import { SearchResult } from "@/components/ui/search-result";
 import { Search } from "@/components/ui/search";
 import { Suspense } from "react";
@@ -13,7 +11,7 @@ export default async function Page({
 }: {
   searchParams?: { query?: string };
 }) {
-  const query = searchParams?.query || "";
+  const query = searchParams?.query?.trim() || "";
 
   return (
     <MainColumn
