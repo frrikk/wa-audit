@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { MainColumn } from "@/components/layout/main-column";
 import { GridList } from "@/components/layout/grid-list";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function Page({
   searchParams,
@@ -20,7 +20,7 @@ export default async function Page({
     >
       <Search />
       <GridList>
-        <Suspense>
+        <Suspense fallback={<div>Loading..</div>}>
           <SearchResult query={query} />
         </Suspense>
       </GridList>

@@ -19,7 +19,7 @@ export const Search = () => {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 0);
+  }, 200);
 
   return (
     <div
@@ -30,7 +30,7 @@ export const Search = () => {
       <div className={cn("relative flex flex-col gap-1")}>
         <div
           className={cn(
-            "absolute w-full h-[42px] -bottom-[44px] bg-gradient-to-b from-gray-100 via-gray-100 via-10%",
+            "absolute w-full h-[42px] -bottom-[45px] bg-gradient-to-b from-gray-100 via-gray-100 via-10%",
           )}
         />
         <label htmlFor="search" className={cn("text-sm font-light ")}>
