@@ -25,7 +25,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.className} bg-gray-100 h-dvh`}
+        className={`${inter.className} bg-gray-100 min-h-dvh`}
       >
         <MantineProvider>
           <div
