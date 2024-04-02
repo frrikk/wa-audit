@@ -14,11 +14,22 @@ export const MainColumn = ({
 }: MainColumnProps) => {
   return (
     <main className={cn("animate-fadeIn")}>
-      <h1
-        className={cn("font-light text-3xl antialiased transition ease-in-out")}
-      >
-        {pageHeading}
-      </h1>
+      <div className={cn("flex justify-between gap-2")}>
+        <h1
+          className={cn(
+            "font-light text-xl lg:text-3xl antialiased transition ease-in-out",
+          )}
+        >
+          {pageHeading}
+        </h1>
+        <div
+          className={cn(
+            "p-3 rounded-full bg-sky-900 text-sky-100 min-h-10 min-w-10 size-10 font-medium flex justify-center items-center",
+          )}
+        >
+          {/*{user}*/}F
+        </div>
+      </div>
       {subHeading ? (
         <p className={cn("font-light text-sm mt-2")}>
           Tests done by{" "}
