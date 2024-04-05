@@ -22,9 +22,9 @@ export default async function Page({
 
   const query = searchParams?.query?.trim() || "";
 
-  // if (!user) {
-  //   redirect("/login");
-  // }
+  if (!user) {
+    redirect("/login");
+  }
 
   const iconName = user?.email?.at(0);
 

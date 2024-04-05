@@ -6,7 +6,7 @@ export function SignInWithAzureClient() {
   const supabase = createClient();
 
   const handleAzureLogin = async () => {
-    const { data } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: "azure",
       options: {
         scopes: "openid profile email offline_access",
