@@ -14,7 +14,8 @@ export default async function Page({
 }: {
   searchParams?: { query?: string };
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -26,8 +27,6 @@ export default async function Page({
   }
 
   const iconName = user?.email?.at(0);
-
-  console.log({ user });
 
   return (
     <MainColumn

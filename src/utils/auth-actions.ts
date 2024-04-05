@@ -32,12 +32,16 @@ export async function logOut() {
 
 export async function loginWithAzure() {
   const supabase = createClient();
-  const { data, error } = await supabase.auth.signInWithOAuth({
+
+  const { data } = await supabase.auth.signInWithOAuth({
     provider: "azure",
     options: {
-      scopes: "email",
+      scopes: "email User.Read openid profile offline_access",
+      redirectTo: `/auth/callback`,
     },
   });
 
-  redirect(`${data.url}`);
+  if (data.url) {
+    redirect(data.url);
+  }
 }
