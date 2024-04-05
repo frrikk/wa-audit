@@ -29,12 +29,10 @@ export async function GET(request: Request) {
     );
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      return NextResponse.redirect(`https://wa-audit.vercel.app/${next}`);
+      return NextResponse.redirect(`${origin}${next}`);
     }
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(
-    `https://wa-audit.vercel.app/auth/auth-code-error`,
-  );
+  return NextResponse.redirect(`${origin}/auth/auth-code-error`);
 }

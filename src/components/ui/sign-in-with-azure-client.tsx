@@ -11,7 +11,7 @@ export function SignInWithAzureClient() {
       provider: "azure",
       options: {
         scopes: "openid profile email offline_access",
-        redirectTo: `${location.origin}/auth/callback`,
+        redirectTo: `/auth/callback`,
       },
     });
   };
