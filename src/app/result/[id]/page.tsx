@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cn } from "@/utils/cn";
 import { A11yAccordion } from "@/components/accordion";
 import { IconArrowLeft } from "@tabler/icons-react";
+import { redirect } from "next/navigation";
 
 export default async function ResultPage({
   params,
@@ -11,13 +12,18 @@ export default async function ResultPage({
   params: { id: string };
 }) {
   const supabase = createClient();
-
   const { data } = await supabase
     .from("web")
     .select("axe_result, url")
     .eq("id", params.id);
 
+  const { data: userData } = await supabase.auth.getUser();
+
   if (!data) return null;
+
+  if (!userData.user) {
+    redirect("/login");
+  }
 
   const axeResult: AxeResult[] = data[0].axe_result;
   const url = data[0].url;

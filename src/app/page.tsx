@@ -15,18 +15,24 @@ export default async function Page({
   searchParams?: { query?: string };
 }) {
   const supabase = createClient();
-  const { data } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   const query = searchParams?.query?.trim() || "";
 
-  console.log(data);
-
-  if (!data.user) {
+  if (!user) {
     redirect("/login");
   }
 
+  const iconName = user?.email?.at(0);
+
+  console.log({ user });
+
   return (
     <MainColumn
+      email={user?.email ?? ""}
+      nameIcon={iconName ?? ""}
       pageHeading="WebPerf Audit for Tietoevry Norway related websites"
       subHeading
     >

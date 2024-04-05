@@ -6,14 +6,17 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { forwardRef } from "react";
 import { IconExclamationCircle } from "@tabler/icons-react";
-import { login } from "@/app/login/actions";
+import { Button } from "@/components/ui/button";
+import { login } from "@/utils/auth-actions";
 
 const schema = z.object({
   email: z
     .string()
-    .min(1, { message: "Email must be at least one character" })
+    .min(1, { message: "Email must be at least 3 characters" })
     .email({ message: "Must be a valid email address" }),
-  password: z.string().min(4),
+  password: z
+    .string()
+    .min(4, { message: "Password must be at least 4 characters" }),
 });
 
 export type FormType = z.infer<typeof schema>;
@@ -30,8 +33,6 @@ export const Form = () => {
       await login(data);
     }
   };
-
-  console.log(errors);
 
   return (
     <form
@@ -62,14 +63,9 @@ export const Form = () => {
         )}
       </div>
 
-      <button
-        className={cn(
-          "flex w-fill p-3 justify-center bg-sky-950 rounded-md text-sky-50 mt-4",
-        )}
-        type="submit"
-      >
+      <Button buttonType="submit" type="submit" className={cn("mt-4")}>
         Login
-      </button>
+      </Button>
     </form>
   );
 };

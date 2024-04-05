@@ -1,16 +1,21 @@
 import { cn } from "@/utils/cn";
 import Link from "next/link";
+import { HeaderMenu } from "@/components/ui/header-menu";
 
 interface MainColumnProps {
   children: React.ReactNode;
   pageHeading: string;
   subHeading?: boolean;
+  nameIcon: string;
+  email: string;
 }
 
 export const MainColumn = ({
   children,
   pageHeading,
   subHeading,
+  nameIcon,
+  email,
 }: MainColumnProps) => {
   return (
     <main className={cn("animate-fadeIn")}>
@@ -22,13 +27,7 @@ export const MainColumn = ({
         >
           {pageHeading}
         </h1>
-        <div
-          className={cn(
-            "p-3 rounded-full bg-sky-900 text-sky-100 min-h-10 min-w-10 size-10 font-medium flex justify-center items-center",
-          )}
-        >
-          {/*{user}*/}F
-        </div>
+        <HeaderMenu nameIcon={nameIcon} email={email} />
       </div>
       {subHeading ? (
         <p className={cn("font-light text-sm mt-2")}>
