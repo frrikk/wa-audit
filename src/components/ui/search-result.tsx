@@ -37,11 +37,11 @@ export async function SearchResult({ query }: SearchResultProps) {
   return (
     <>
       {filteredData.map((item) => {
-        const scoreAvarage = Math.round(item.score / 4);
+        const scoreAverage = Math.round(item.score / 4);
 
         return (
           <li key={item.id} className={cn("flex flex-col")}>
-            <PageCard {...item} query={query} avarageScore={scoreAvarage} />
+            <PageCard {...item} query={query} avarageScore={scoreAverage} />
           </li>
         );
       })}

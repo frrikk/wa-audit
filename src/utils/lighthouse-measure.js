@@ -47,13 +47,14 @@ async function runLighthouseAndSaveScores(page) {
   });
 
   const axeResult = await loadPage(browser, page.url);
-
   const results = await axeResult.analyze();
 
   const numberOfViolations = results.violations.length;
 
   // Extracting category scores from the report
   const reportJson = JSON.parse(runnerResult.report);
+
+  console.log(reportJson);
 
   const scores = {
     performance: reportJson.categories.performance.score * 100,

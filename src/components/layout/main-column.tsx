@@ -1,24 +1,34 @@
 import { cn } from "@/utils/cn";
 import Link from "next/link";
+import { HeaderMenu } from "@/components/ui/header-menu";
 
 interface MainColumnProps {
   children: React.ReactNode;
   pageHeading: string;
   subHeading?: boolean;
+  nameIcon: string;
+  email: string;
 }
 
 export const MainColumn = ({
   children,
   pageHeading,
   subHeading,
+  nameIcon,
+  email,
 }: MainColumnProps) => {
   return (
     <main className={cn("animate-fadeIn")}>
-      <h1
-        className={cn("font-light text-3xl antialiased transition ease-in-out")}
-      >
-        {pageHeading}
-      </h1>
+      <div className={cn("flex justify-between gap-2")}>
+        <h1
+          className={cn(
+            "font-light text-xl lg:text-3xl antialiased transition ease-in-out",
+          )}
+        >
+          {pageHeading}
+        </h1>
+        <HeaderMenu nameIcon={nameIcon} email={email} />
+      </div>
       {subHeading ? (
         <p className={cn("font-light text-sm mt-2")}>
           Tests done by{" "}

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   robots: "noindex, nofollow",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
