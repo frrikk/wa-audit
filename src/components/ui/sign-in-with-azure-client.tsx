@@ -2,16 +2,26 @@
 
 import { createClient } from "@/utils/supabase/client";
 import { cn } from "@/utils/cn";
+import { useParams } from "next/navigation";
+
+const getBaseUrl = () => {
+  if (typeof window !== "undefined") {
+    return window.location.origin;
+  }
+  // Fallback for environments where `window` is not available
+  return process.env.NEXT_PUBLIC_BASE_URL! || "http://localhost:3000";
+};
 
 export function SignInWithAzureClient() {
   const supabase = createClient();
+  const redirectTo = getBaseUrl() + "/auth/callback";
 
   const handleAzureLogin = async () => {
-    await supabase.auth.signInWithOAuth({
+    const { data } = await supabase.auth.signInWithOAuth({
       provider: "azure",
       options: {
         scopes: "openid profile email offline_access",
-        redirectTo: `${location.origin}/auth/callback`,
+        redirectTo: redirectTo,
       },
     });
   };
