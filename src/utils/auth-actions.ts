@@ -37,7 +37,7 @@ export async function loginWithAzure() {
     provider: "azure",
     options: {
       scopes: "email User.Read openid profile offline_access",
-      redirectTo: `/auth/callback`,
+      redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL!}/auth/callback`,
     },
   });
 
