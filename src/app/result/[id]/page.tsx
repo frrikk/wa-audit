@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/server";
 import { AxeResult } from "@/utils/types";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
@@ -17,11 +17,13 @@ export default async function ResultPage({
     .select("axe_result, url")
     .eq("id", params.id);
 
-  const { data: userData } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!data) return null;
 
-  if (!userData.user) {
+  if (!user) {
     redirect("/login");
   }
 

@@ -2,6 +2,7 @@ import { cn } from "@/utils/cn";
 import { redirect } from "next/navigation";
 import { SignInWithAzure } from "@/components/ui/login-with-azure";
 import { createClient } from "@/utils/supabase/server";
+import { SignInWithAzureClient } from "@/components/ui/sign-in-with-azure-client";
 
 export default async function LoginPage() {
   const supabase = createClient();
@@ -16,8 +17,9 @@ export default async function LoginPage() {
   return (
     <div className={cn("flex h-dvh flex-col items-center mt-10")}>
       {/*<Form />*/}
-      <SignInWithAzure />
+      {/*<SignInWithAzure />*/}
       {/*<OAuthLogin />*/}
+      <SignInWithAzureClient />
     </div>
   );
 }

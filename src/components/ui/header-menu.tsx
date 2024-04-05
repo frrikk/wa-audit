@@ -12,7 +12,7 @@ interface HeaderMenuProps {
 
 export const HeaderMenu = ({ nameIcon, email }: HeaderMenuProps) => {
   return (
-    <Menu width={200} trigger="hover" position="bottom-end" shadow="xl">
+    <Menu width={300} trigger="hover" position="bottom-end" shadow="xl">
       <Menu.Target>
         <button>
           <NameIcon name={nameIcon} />
